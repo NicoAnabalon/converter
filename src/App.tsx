@@ -43,6 +43,7 @@ function App() {
         <textarea
           placeholder="Insert JSON here..."
           onChange={validateJSON}
+          autoFocus
         ></textarea>
       </div>
       <div className="textarea-container">
