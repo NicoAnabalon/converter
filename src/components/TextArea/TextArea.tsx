@@ -53,7 +53,7 @@ export const TextArea = ({ label, readonly, editable }: ITextAreaProps) => {
             : { height: "100%", width: "48%" }
         }
         multiline
-        rows={20}
+        rows={18}
         fullWidth
       />
     );
@@ -73,7 +73,7 @@ export const TextArea = ({ label, readonly, editable }: ITextAreaProps) => {
       }}
       onChange={(e) => editable?.onChange(e.target.value)}
       multiline
-      rows={20}
+      rows={18}
       fullWidth
       error={editable?.error?.message ? true : false}
       helperText={editable?.error?.message}
