@@ -46,30 +46,36 @@ export const Converter = ({
         <Typography
           variant="h3"
           component="h3"
-          sx={{ height: "15%", padding: "10px 0 0", boxSizing: "border-box" }}
+          sx={{
+            height: { xs: "6.5%", sm: "10%", md: "15%" },
+            padding: "10px 0 0",
+            boxSizing: "border-box",
+            fontSize: { xs: "1.3rem", sm: "2rem", md: "3rem" },
+          }}
         >{`${from} to ${to}`}</Typography>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            height: "70%",
+            height: { xs: "83.5%", sm: "80%", md: "75%" },
             width: "90%",
             margin: "auto",
+            padding: "10px 0 0",
+            boxSizing: "border-box",
           }}
         >
           <TextArea
             label={from}
             editable={{ onChange, error: { message: errorMessage } }}
           />
-          <TextArea label={to} readonly={{ value: convertedValue }} />
+          <TextArea label={from} readonly={{ value: convertedValue }} />
         </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "15%",
+            height: "10%",
             width: "90%",
             margin: "auto",
           }}

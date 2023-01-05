@@ -27,19 +27,12 @@ interface ITextAreaProps {
 export const TextArea = ({ label, readonly, editable }: ITextAreaProps) => {
   const theme = useTheme();
 
-  const getStyle = (theme: string) => {
-    if (theme === "dark") {
-      return;
-    }
-    return {};
-  };
-
   if (readonly) {
     return (
       <TextField
         id="outlined-multiline-static"
         label={label}
-        placeholder={`Insert ${label} here...`}
+        placeholder={`Waiting ${label} to start conversion...`}
         InputLabelProps={{
           shrink: true,
         }}
@@ -53,7 +46,7 @@ export const TextArea = ({ label, readonly, editable }: ITextAreaProps) => {
             : { height: "100%", width: "48%" }
         }
         multiline
-        rows={20}
+        rows={18}
         fullWidth
       />
     );
@@ -73,7 +66,7 @@ export const TextArea = ({ label, readonly, editable }: ITextAreaProps) => {
       }}
       onChange={(e) => editable?.onChange(e.target.value)}
       multiline
-      rows={20}
+      rows={18}
       fullWidth
       error={editable?.error?.message ? true : false}
       helperText={editable?.error?.message}
