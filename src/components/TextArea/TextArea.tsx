@@ -27,19 +27,12 @@ interface ITextAreaProps {
 export const TextArea = ({ label, readonly, editable }: ITextAreaProps) => {
   const theme = useTheme();
 
-  const getStyle = (theme: string) => {
-    if (theme === "dark") {
-      return;
-    }
-    return {};
-  };
-
   if (readonly) {
     return (
       <TextField
         id="outlined-multiline-static"
         label={label}
-        placeholder={`Insert ${label} here...`}
+        placeholder={`Waiting ${label} to start conversion...`}
         InputLabelProps={{
           shrink: true,
         }}

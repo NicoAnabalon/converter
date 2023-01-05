@@ -57,7 +57,6 @@ export const Converter = ({
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
             height: { xs: "83.5%", sm: "80%", md: "75%" },
             width: "90%",
             margin: "auto",
@@ -69,7 +68,7 @@ export const Converter = ({
             label={from}
             editable={{ onChange, error: { message: errorMessage } }}
           />
-          <TextArea label={to} readonly={{ value: convertedValue }} />
+          <TextArea label={from} readonly={{ value: convertedValue }} />
         </Box>
         <Box
           sx={{
