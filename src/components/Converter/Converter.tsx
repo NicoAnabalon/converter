@@ -44,7 +44,8 @@ export const Converter = ({
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3"
+          component="h3"
           sx={{ height: "15%", padding: "10px 0 0", boxSizing: "border-box" }}
         >{`${from} to ${to}`}</Typography>
         <Box

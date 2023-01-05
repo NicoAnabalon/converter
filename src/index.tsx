@@ -1,18 +1,23 @@
-import React from "react";
+import { createContext, StrictMode, useMemo, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-export const ColorModeContext = React.createContext({
+export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
 
+const selectedTheme =
+  (localStorage.getItem("selectedTheme") ?? "light") === "light"
+    ? "light"
+    : "dark";
+
 export default function ToggleColorMode() {
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
-  const colorMode = React.useMemo(
+  const [mode, setMode] = useState<"light" | "dark">(selectedTheme);
+  const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
@@ -21,7 +26,7 @@ export default function ToggleColorMode() {
     []
   );
 
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {
@@ -44,11 +49,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <HashRouter>
+  <StrictMode>
+    <BrowserRouter>
       <ToggleColorMode />
-    </HashRouter>
-  </React.StrictMode>
+    </BrowserRouter>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
