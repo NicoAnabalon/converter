@@ -46,6 +46,12 @@ export const Navbar = () => {
     navigate(link);
   };
 
+  const handleTheme = () => {
+    const newTheme = theme.palette.mode === "light" ? "dark" : "light";
+    localStorage.setItem("selectedTheme", newTheme);
+    colorMode.toggleColorMode();
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -161,11 +167,7 @@ export const Navbar = () => {
             </ButtonGroup>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={colorMode.toggleColorMode}
-              color="inherit"
-            >
+            <IconButton sx={{ ml: 1 }} onClick={handleTheme} color="inherit">
               {theme.palette.mode === "dark" ? (
                 <Brightness7 />
               ) : (
