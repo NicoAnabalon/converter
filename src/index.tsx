@@ -3,9 +3,42 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./utils";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { HashRouter } from "react-router-dom";
+
+export const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+});
+
+export default function ToggleColorMode() {
+  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    []
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,9 +46,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <HashRouter>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
+      <ToggleColorMode />
     </HashRouter>
   </React.StrictMode>
 );

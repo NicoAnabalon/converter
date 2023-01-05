@@ -9,18 +9,26 @@ import {
   Button,
   MenuItem,
   ButtonGroup,
+  useTheme,
 } from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
-import { useState } from "react";
+import {
+  Brightness4,
+  Brightness7,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
+import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ColorModeContext } from "../..";
 
 const pages: { display: string; link: string }[] = [
   { display: "JSON to GZIP in Base64", link: "/" },
   { display: "GZIP in Base64 to JSON", link: "/gzip-to-json" },
-  { display: "JSON to GZIP", link: "/test2" },
+  //{ display: "JSON to GZIP", link: "/test2" },
 ];
 
 export const Navbar = () => {
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -34,8 +42,8 @@ export const Navbar = () => {
   };
 
   const handleClick = (link: string) => {
-    navigate(link);
     handleCloseNavMenu();
+    navigate(link);
   };
 
   return (
@@ -88,12 +96,19 @@ export const Navbar = () => {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
+              MenuListProps={{
+                style: {
+                  backgroundColor:
+                    theme.palette.mode === "light" ? "#1976d2" : undefined,
+                },
+              }}
             >
               {pages.map((page) => (
                 <MenuItem
                   key={page.display}
                   sx={{
                     border: "1px solid",
+                    color: "white",
                     borderColor:
                       pathname === page.link ? "white" : "transparent",
                   }}
@@ -133,6 +148,10 @@ export const Navbar = () => {
                     color: "white",
                     display: "block",
                     borderColor: "white !important",
+                    ":hover": {
+                      backgroundColor:
+                        theme.palette.mode === "light" ? "#0288d1" : undefined,
+                    },
                   }}
                   variant={pathname === page.link ? "outlined" : "text"}
                 >
@@ -140,6 +159,19 @@ export const Navbar = () => {
                 </Button>
               ))}
             </ButtonGroup>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <Brightness7 />
+              ) : (
+                <Brightness4 />
+              )}
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>
