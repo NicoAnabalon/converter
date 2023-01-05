@@ -57,6 +57,7 @@ export const Converter = ({
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
             height: { xs: "83.5%", sm: "80%", md: "75%" },
             width: "90%",
             margin: "auto",
